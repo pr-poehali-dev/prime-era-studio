@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 
+const LOGO_IMG = "https://cdn.poehali.dev/projects/32385402-917f-4a98-bde4-4a738e45c91f/bucket/f1ba28e4-0b45-49db-b987-0979006a348c.jpg";
 const HERO_IMG = "https://cdn.poehali.dev/projects/32385402-917f-4a98-bde4-4a738e45c91f/files/dc81565d-1d8d-45bf-b747-554266a5e350.jpg";
 const HAMMOCK_IMG = "https://cdn.poehali.dev/projects/32385402-917f-4a98-bde4-4a738e45c91f/files/3b67dcb1-bbdd-4d11-bfba-3a582830505e.jpg";
 const LOUNGE_IMG = "https://cdn.poehali.dev/projects/32385402-917f-4a98-bde4-4a738e45c91f/files/b52f03f7-d154-4a84-9940-a71843cfb6bc.jpg";
@@ -80,9 +81,7 @@ export default function Index() {
     <div className="relative min-h-screen bg-prime-beige overflow-x-hidden">
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 bg-prime-beige/90 backdrop-blur-sm border-b border-prime-warm/30">
-        <div className="font-serif text-prime-brown text-xl tracking-widest font-light">
-          PRIME <span className="text-prime-copper">ERA</span>
-        </div>
+        <img src={LOGO_IMG} alt="Прайм Эра" className="h-12 w-auto object-contain" />
         <div className="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase text-prime-brown/60 font-sans">
           <a href="#philosophy" className="hover:text-prime-copper transition-colors">Философия</a>
           <a href="#formats" className="hover:text-prime-copper transition-colors">Форматы</a>
@@ -474,9 +473,7 @@ export default function Index() {
       <footer className="py-12 bg-prime-dark border-t border-prime-warm/10">
         <div className="container mx-auto px-6 md:px-16 max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="font-serif text-prime-light/70 text-xl tracking-widest font-light">
-              PRIME <span className="text-prime-copper">ERA</span>
-            </div>
+            <img src={LOGO_IMG} alt="Прайм Эра" className="h-10 w-auto object-contain brightness-0 invert opacity-50" />
             <div className="flex flex-wrap justify-center gap-6 text-prime-light/30 font-sans text-xs tracking-widest uppercase">
               <a href="#philosophy" className="hover:text-prime-warm transition-colors">Философия</a>
               <a href="#formats" className="hover:text-prime-warm transition-colors">Форматы</a>
