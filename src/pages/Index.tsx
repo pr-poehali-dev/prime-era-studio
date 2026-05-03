@@ -373,8 +373,8 @@ export default function Index() {
                 <div className="flex gap-4 items-start">
                   <Icon name="MapPin" size={18} className="text-prime-copper flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-sans text-prime-warm/80 text-sm font-light">Подольск, мкр. Кузнечики</p>
-                    <p className="font-sans text-prime-warm/50 text-xs mt-0.5">Уточните адрес при записи</p>
+                    <p className="font-sans text-prime-warm/80 text-sm font-light">Подольск, мкр. Кузнечики,</p>
+                    <p className="font-sans text-prime-warm/80 text-sm font-light">ул. Генерала Варенникова, д.4</p>
                   </div>
                 </div>
                 <div className="flex gap-4 items-start">
@@ -383,7 +383,7 @@ export default function Index() {
                 </div>
                 <div className="flex gap-4 items-start">
                   <Icon name="Phone" size={18} className="text-prime-copper flex-shrink-0 mt-0.5" />
-                  <p className="font-sans text-prime-warm/80 text-sm font-light">+7 (XXX) XXX-XX-XX</p>
+                  <a href="tel:+79198342399" className="font-sans text-prime-warm/80 text-sm font-light hover:text-prime-copper transition-colors">+7 (919) 834-23-99</a>
                 </div>
               </div>
               <div className="flex gap-4 mt-10 reveal reveal-delay-3">
