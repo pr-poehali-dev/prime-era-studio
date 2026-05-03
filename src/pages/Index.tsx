@@ -81,7 +81,7 @@ export default function Index() {
     <div className="relative min-h-screen bg-prime-beige overflow-x-hidden">
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 bg-prime-beige/90 backdrop-blur-sm border-b border-prime-warm/30">
-        <img src={LOGO_IMG} alt="Прайм Эра" className="h-14 w-auto object-contain" style={{ mixBlendMode: 'multiply' }} />
+        <img src={LOGO_IMG} alt="Прайм Эра" className="h-12 w-auto object-contain" />
         <div className="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase text-prime-brown/60 font-sans">
           <a href="#philosophy" className="hover:text-prime-copper transition-colors">Философия</a>
           <a href="#formats" className="hover:text-prime-copper transition-colors">Форматы</a>
@@ -473,7 +473,7 @@ export default function Index() {
       <footer className="py-12 bg-prime-dark border-t border-prime-warm/10">
         <div className="container mx-auto px-6 md:px-16 max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <img src={LOGO_IMG} alt="Прайм Эра" className="h-14 w-auto object-contain brightness-0 invert opacity-80" />
+            <img src={LOGO_IMG} alt="Прайм Эра" className="h-10 w-auto object-contain brightness-0 invert opacity-50" />
             <div className="flex flex-wrap justify-center gap-6 text-prime-light/30 font-sans text-xs tracking-widest uppercase">
               <a href="#philosophy" className="hover:text-prime-warm transition-colors">Философия</a>
               <a href="#formats" className="hover:text-prime-warm transition-colors">Форматы</a>
