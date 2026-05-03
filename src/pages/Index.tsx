@@ -343,7 +343,7 @@ export default function Index() {
                 Актуальное расписание всех форматов — в нашем Telegram-канале. Там же можно записаться на занятие в пару кликов.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 reveal reveal-delay-3">
-                <a href="https://t.me/" target="_blank" rel="noopener noreferrer" className="prime-btn text-center flex items-center justify-center gap-3">
+                <a href="https://t.me/primera_pd" target="_blank" rel="noopener noreferrer" className="prime-btn text-center flex items-center justify-center gap-3">
                   <Icon name="Send" size={16} />
                   Расписание в Telegram
                 </a>
