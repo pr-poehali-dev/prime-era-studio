@@ -1,16 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "@/components/ui/icon";
 import { LOGO_IMG, formats } from "./constants";
+
+const BOOKING_URL = "https://functions.poehali.dev/27bf4af4-7131-4557-9f57-931d049c7024";
+
+function getUtmParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    source: params.get("utm_source") || "",
+    medium: params.get("utm_medium") || "",
+    campaign: params.get("utm_campaign") || "",
+    content: params.get("utm_content") || "",
+  };
+}
 
 interface ContactSectionProps {
   formRef: React.RefObject<HTMLElement>;
   formData: { name: string; phone: string; format: string };
   setFormData: (data: { name: string; phone: string; format: string }) => void;
   submitted: boolean;
-  onSubmit: (e: React.FormEvent) => void;
+  setSubmitted: (v: boolean) => void;
 }
 
-export default function ContactSection({ formRef, formData, setFormData, submitted, onSubmit }: ContactSectionProps) {
+export default function ContactSection({ formRef, formData, setFormData, submitted, setSubmitted }: ContactSectionProps) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(BOOKING_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, utm: getUtmParams() }),
+      });
+      if (!res.ok) throw new Error("server error");
+      setSubmitted(true);
+    } catch {
+      setError("Не удалось отправить заявку. Позвоните нам: +7 (919) 834-23-99");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       {/* ═══ CONTACTS ═══ */}
@@ -40,24 +74,38 @@ export default function ContactSection({ formRef, formData, setFormData, submitt
                 </div>
               </div>
               <div className="flex gap-4 mt-10 reveal reveal-delay-3">
-                <a href="#" className="w-10 h-10 border border-prime-warm/20 flex items-center justify-center hover:border-prime-copper hover:text-prime-copper text-prime-warm/50 transition-colors">
-                  <Icon name="MessageCircle" size={16} />
-                </a>
-                <a href="#" className="w-10 h-10 border border-prime-warm/20 flex items-center justify-center hover:border-prime-copper hover:text-prime-copper text-prime-warm/50 transition-colors">
+                <a
+                  href="https://t.me/primera_pd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Telegram @primera_pd"
+                  className="w-10 h-10 border border-prime-warm/20 flex items-center justify-center hover:border-prime-copper hover:text-prime-copper text-prime-warm/50 transition-colors"
+                >
                   <Icon name="Send" size={16} />
                 </a>
-                <a href="#" className="w-10 h-10 border border-prime-warm/20 flex items-center justify-center hover:border-prime-copper hover:text-prime-copper text-prime-warm/50 transition-colors">
+                <a
+                  href="https://www.instagram.com/primera_pd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Instagram @primera_pd"
+                  className="w-10 h-10 border border-prime-warm/20 flex items-center justify-center hover:border-prime-copper hover:text-prime-copper text-prime-warm/50 transition-colors"
+                >
                   <Icon name="Instagram" size={16} />
                 </a>
               </div>
             </div>
 
+            {/* Яндекс.Карта */}
             <div className="reveal reveal-delay-2">
-              <div className="h-80 bg-prime-dark/40 border border-prime-warm/10 flex items-center justify-center">
-                <div className="text-center">
-                  <Icon name="Map" size={40} className="text-prime-warm/20 mx-auto mb-3" />
-                  <p className="font-sans text-prime-warm/30 text-xs tracking-widest uppercase">Карта появится здесь</p>
-                </div>
+              <div className="h-80 overflow-hidden">
+                <iframe
+                  title="Студия Prime Era на карте"
+                  src="https://yandex.ru/map-widget/v1/?ll=37.528000%2C55.428000&z=16&pt=37.528000%2C55.428000%2Cpm2rdm&text=%D0%9F%D0%BE%D0%B4%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%2C+%D0%9A%D1%83%D0%B7%D0%BD%D0%B5%D1%87%D0%B8%D0%BA%D0%B8%2C+%D1%83%D0%BB.+%D0%93%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D0%BB%D0%B0+%D0%92%D0%B0%D1%80%D0%B5%D0%BD%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2%D0%B0+4"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: "grayscale(30%) contrast(1.05)" }}
+                  allowFullScreen
+                />
               </div>
             </div>
           </div>
@@ -76,7 +124,7 @@ export default function ContactSection({ formRef, formData, setFormData, submitt
           </div>
 
           {!submitted ? (
-            <form onSubmit={onSubmit} className="space-y-4 reveal reveal-delay-1">
+            <form onSubmit={handleSubmit} className="space-y-4 reveal reveal-delay-1">
               <input
                 type="text"
                 placeholder="Ваше имя"
@@ -103,19 +151,28 @@ export default function ContactSection({ formRef, formData, setFormData, submitt
                   <option key={f.name} value={f.name}>{f.name} · {f.duration}</option>
                 ))}
               </select>
-              <button type="submit" className="w-full prime-btn text-center py-5 text-sm tracking-widest">
-                Записаться за 700 ₽
+              {error && (
+                <p className="text-red-500 font-sans text-sm text-center">{error}</p>
+              )}
+              <button
+                type="submit"
+                disabled={loading}
+                data-utm-content="form-submit"
+                className="w-full prime-btn text-center py-5 text-sm tracking-widest disabled:opacity-60"
+              >
+                {loading ? "Отправляем..." : "Записаться за 700 ₽"}
               </button>
               <p className="text-center font-sans text-prime-brown/30 text-xs font-light leading-relaxed">
-                Нажимая кнопку, вы соглашаетесь с обработкой персональных данных
+                Нажимая кнопку, вы соглашаетесь с{" "}
+                <a href="/privacy" className="underline hover:text-prime-copper transition-colors">обработкой персональных данных</a>
               </p>
             </form>
           ) : (
             <div className="text-center py-16 border border-prime-warm/30 bg-prime-cream reveal">
               <Icon name="CheckCircle" size={40} className="text-prime-copper mx-auto mb-6" />
-              <h3 className="font-serif text-3xl text-prime-brown font-light mb-3">Заявка принята</h3>
+              <h3 className="font-serif text-3xl text-prime-brown font-light mb-3">Спасибо!</h3>
               <p className="font-sans text-prime-brown/60 text-sm font-light">
-                Мы свяжемся с вами в ближайшее время
+                Мы свяжемся с вами в течение часа
               </p>
             </div>
           )}
@@ -132,7 +189,8 @@ export default function ContactSection({ formRef, formData, setFormData, submitt
               <a href="#formats" className="hover:text-prime-warm transition-colors">Форматы</a>
               <a href="#prices" className="hover:text-prime-warm transition-colors">Абонементы</a>
               <a href="#contacts" className="hover:text-prime-warm transition-colors">Контакты</a>
-              <a href="#" className="hover:text-prime-warm transition-colors">Политика конфиденциальности</a>
+              <a href="/privacy" className="hover:text-prime-warm transition-colors">Политика конфиденциальности</a>
+              <a href="/rules" className="hover:text-prime-warm transition-colors">Правила посещения</a>
             </div>
             <p className="font-sans text-prime-light/20 text-xs font-light">© 2024 Prime Era</p>
           </div>

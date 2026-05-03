@@ -2,7 +2,7 @@ import Icon from "@/components/ui/icon";
 import { LOGO_IMG, HERO_IMG, HAMMOCK_IMG, LOUNGE_IMG, advantages, formats } from "./constants";
 
 interface HeroSectionProps {
-  onScrollToForm: () => void;
+  onScrollToForm: (utmContent?: string) => void;
 }
 
 export default function HeroSection({ onScrollToForm }: HeroSectionProps) {
@@ -18,7 +18,7 @@ export default function HeroSection({ onScrollToForm }: HeroSectionProps) {
           <a href="#prices" className="hover:text-prime-copper transition-colors">Цены</a>
           <a href="#contacts" className="hover:text-prime-copper transition-colors">Контакты</a>
         </div>
-        <button onClick={onScrollToForm} className="prime-btn text-xs py-3 px-6">
+        <button onClick={() => onScrollToForm("nav-btn")} className="prime-btn text-xs py-3 px-6">
           Записаться
         </button>
       </nav>
@@ -43,7 +43,7 @@ export default function HeroSection({ onScrollToForm }: HeroSectionProps) {
               Студия пилатеса на реформерах<br />и растяжки в гамаках
             </p>
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-up-delay2 opacity-0" style={{ animationFillMode: "forwards" }}>
-              <button onClick={onScrollToForm} className="prime-btn text-center">
+              <button onClick={() => onScrollToForm("hero-btn")} className="prime-btn text-center">
                 Пробное за 700 ₽
               </button>
               <a href="#philosophy" className="prime-btn-outline text-center border-prime-warm/40 text-prime-warm hover:bg-prime-warm/20 hover:text-prime-light hover:border-prime-warm">
