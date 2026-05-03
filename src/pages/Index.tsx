@@ -85,6 +85,7 @@ export default function Index() {
         <div className="hidden md:flex items-center gap-8 text-xs tracking-widest uppercase text-prime-brown/60 font-sans">
           <a href="#philosophy" className="hover:text-prime-copper transition-colors">Философия</a>
           <a href="#formats" className="hover:text-prime-copper transition-colors">Форматы</a>
+          <a href="#schedule" className="hover:text-prime-copper transition-colors">Расписание</a>
           <a href="#prices" className="hover:text-prime-copper transition-colors">Цены</a>
           <a href="#contacts" className="hover:text-prime-copper transition-colors">Контакты</a>
         </div>
@@ -325,6 +326,95 @@ export default function Index() {
                 <span>Все абонементы действуют на все групповые классы</span>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ SCHEDULE ═══ */}
+      <section id="schedule" className="py-28 bg-prime-beige">
+        <div className="container mx-auto px-6 md:px-16 max-w-5xl">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <p className="section-label mb-4 reveal">Расписание</p>
+              <h2 className="font-serif text-4xl md:text-5xl text-prime-brown font-light leading-tight mb-6 reveal reveal-delay-1">
+                Найди <em className="text-prime-copper">своё время</em>
+              </h2>
+              <p className="font-sans text-prime-brown/60 text-base font-light leading-relaxed mb-10 reveal reveal-delay-2">
+                Актуальное расписание всех форматов — в нашем Telegram-канале. Там же можно записаться на занятие в пару кликов.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 reveal reveal-delay-3">
+                <a href="https://t.me/" target="_blank" rel="noopener noreferrer" className="prime-btn text-center flex items-center justify-center gap-3">
+                  <Icon name="Send" size={16} />
+                  Расписание в Telegram
+                </a>
+              </div>
+            </div>
+            <div className="reveal reveal-delay-2">
+              <div className="border border-prime-warm/40 bg-prime-cream divide-y divide-prime-warm/30">
+                {[
+                  { day: "Понедельник", slots: ["8:00 Prime Express", "10:00 Prime Reformer", "19:00 Prime Back"] },
+                  { day: "Вторник", slots: ["9:00 Prime Aero", "11:00 Prime Core", "20:00 Prime Relax"] },
+                  { day: "Среда", slots: ["8:00 Prime Express", "10:00 Prime Sculpt", "19:00 Prime Mobility"] },
+                  { day: "Четверг", slots: ["9:00 Prime Reformer", "11:00 Prime Back", "20:00 Prime Recovery"] },
+                  { day: "Пятница", slots: ["8:00 Prime Express", "10:00 Prime Combo", "19:00 Prime Time ✦"] },
+                  { day: "Суббота / Воскресенье", slots: ["10:00 Prime Aero", "12:00 Prime Relax"] },
+                ].map((row) => (
+                  <div key={row.day} className="flex gap-4 px-6 py-4 hover:bg-prime-beige transition-colors">
+                    <span className="font-sans text-prime-copper text-xs tracking-widest uppercase w-28 flex-shrink-0 pt-0.5">{row.day}</span>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1">
+                      {row.slots.map((s) => (
+                        <span key={s} className="font-sans text-prime-brown/70 text-xs font-light">{s}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <div className="px-6 py-3 bg-prime-warm/20">
+                  <p className="font-sans text-prime-brown/40 text-xs font-light italic">Расписание примерное — актуальное в Telegram</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ REVIEWS ═══ */}
+      <section id="reviews" className="py-28 bg-prime-brown">
+        <div className="container mx-auto px-6 md:px-16 max-w-5xl">
+          <div className="mb-16 text-center reveal">
+            <p className="section-label text-prime-warm/60 mb-4">Отзывы</p>
+            <h2 className="font-serif text-4xl md:text-5xl text-prime-light font-light">
+              Говорят <em className="text-prime-warm">наши клиенты</em>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { name: "Анастасия К.", age: "34 года", text: "Ваш отзыв появится здесь совсем скоро", avatar: "А" },
+              { name: "Елена М.", age: "41 год", text: "Ваш отзыв появится здесь совсем скоро", avatar: "Е" },
+              { name: "Ольга Р.", age: "29 лет", text: "Ваш отзыв появится здесь совсем скоро", avatar: "О" },
+            ].map((r, i) => (
+              <div key={i} className={`border border-prime-warm/15 p-8 hover:border-prime-copper/40 transition-colors reveal reveal-delay-${i + 1}`}>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-prime-copper/20 border border-prime-copper/30 flex items-center justify-center flex-shrink-0">
+                    <span className="font-serif text-prime-warm text-lg font-light">{r.avatar}</span>
+                  </div>
+                  <div>
+                    <p className="font-sans text-prime-warm/90 text-sm font-medium">{r.name}</p>
+                    <p className="font-sans text-prime-warm/40 text-xs">{r.age}</p>
+                  </div>
+                </div>
+                <div className="flex gap-0.5 mb-4">
+                  {[1,2,3,4,5].map((s) => (
+                    <span key={s} className="text-prime-copper text-sm">★</span>
+                  ))}
+                </div>
+                <p className="font-serif text-prime-warm/50 text-base italic font-light leading-relaxed">
+                  «{r.text}»
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 text-center reveal">
+            <p className="font-sans text-prime-warm/30 text-xs tracking-widest uppercase">Скоро здесь появятся настоящие отзывы наших клиентов</p>
           </div>
         </div>
       </section>
